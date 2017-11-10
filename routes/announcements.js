@@ -14,7 +14,14 @@ router.post('/', (req, res) => {
     title: req.body.title
   })
   announcement.save()
-  res.redirect('/announcements')
+  res.redirect('/admin')
 })
+
+router.get('/:id/delete', function(req, res){
+	Announcement.remove({_id: req.params.id},(err) => {
+		if(err) throw err
+		res.redirect('/admin')
+	});
+});
 
 module.exports = router

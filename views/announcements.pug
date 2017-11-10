@@ -1,15 +1,15 @@
 extends layout
 
 block content
-  h1 Test
-  
-  table
-    tr
-      th Title
+  form(action="/admin" method="post")
+    
+    div(class="field is-grouped")
+      input.input(type="text" placeholder="Title" name="title" autofocus)
+      button(class="button is-primary" type="submit") Submit
+      
+  table.table
     each announcement in announcements
       tr
         td= announcement.title
-  
-  form(action="/announcements" method="post")
-    input(type="text" placeholder="Title" name="title")
-    button(type="submit") Submit
+        td
+          a(href=`/admin/${announcement._id}/delete`) Delete  
