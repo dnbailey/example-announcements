@@ -3,10 +3,9 @@ const router = express.Router()
 const Announcement = require('../models/announcements.js')
 
 router.get('/', (req, res) => {
-  Announcement.find((err, announcements) => {
-    if (err) throw err;
-    res.render('announcements.pug', {'announcements': announcements});
-  })
+  Announcement.find()
+    .then(announcements => res.render('announcements.pug', {announcements}))
+    .catch(err => console.log(err))
 })
 
 router.post('/', (req, res) => {
@@ -18,10 +17,9 @@ router.post('/', (req, res) => {
 })
 
 router.get('/:id/delete', function(req, res){
-	Announcement.remove({_id: req.params.id},(err) => {
-		if(err) throw err
-		res.redirect('/admin')
-	});
-});
+	Announcement.remove({_id: req.params.id})
+		.then(res.redirect('/admin'))
+    .catch(err => console.log(err))
+})
 
 module.exports = router

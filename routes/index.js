@@ -3,10 +3,9 @@ const router = express.Router()
 const Announcement = require('../models/announcements.js')
 
 router.get('/', (req, res) => {
-  Announcement.find((err, announcements) => {
-    if (err) throw err;
-    res.render('index.pug', { "announcements": announcements });
-  })
+  Announcement.find()
+    .then(announcements => res.render('index.pug', {announcements}))
+    .catch(console.log(this.err))
 })
 
 module.exports = router
