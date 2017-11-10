@@ -1,8 +1,5 @@
 extends layout
 
 block content
-  h1 Test
-  
-  form(action="/" method="POST")
-    input(type="text" placeholder="Title" name="title")
-    button(type="submit") Submit
+  each announcement in announcements
+    div= announcement.title    

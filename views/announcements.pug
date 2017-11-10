@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1 Test
+  
+  table
+    tr
+      th Title
+    each announcement in announcements
+      tr
+        td= announcement.title
+  
+  form(action="/announcements" method="post")
+    input(type="text" placeholder="Title" name="title")
+    button(type="submit") Submit

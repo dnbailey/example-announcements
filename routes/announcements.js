@@ -5,8 +5,16 @@ const Announcement = require('../models/announcements.js')
 router.get('/', (req, res) => {
   Announcement.find((err, announcements) => {
     if (err) throw err;
-    res.render('index.pug', { "announcements": announcements });
+    res.render('announcements.pug', {'announcements': announcements});
   })
+})
+
+router.post('/', (req, res) => {
+  let announcement = new Announcement({
+    title: req.body.title
+  })
+  announcement.save()
+  res.redirect('/announcements')
 })
 
 module.exports = router
